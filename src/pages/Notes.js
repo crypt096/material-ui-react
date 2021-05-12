@@ -27,6 +27,8 @@ export default function Notes() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTitleError(false)
+    setDetailsError(false)
 
     if(title === '') {
       setTitleError(true)
