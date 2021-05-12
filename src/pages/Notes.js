@@ -7,23 +7,30 @@ import { makeStyles } from "@material-ui/core";
 // Icons
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
-export default function Notes() {
-  const useStyles = makeStyles({
-    btn: {
-      fontSize: 60,
-      backgroundColor: 'violet',
+const useStyles = makeStyles({
+  btn: {
+    fontSize: 60,
+    backgroundColor: 'violet',
+    '&:hover': {
+      backgroundColor: 'blue'
     }
-  })
-  
+  },
+  title: {
+    textDecoration: 'underline',
+    marginBottom: 20,
+  }
+})
+
+export default function Notes() {
+  const classes = useStyles();
+
   return (
     <Container>
-      <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
+      <Typography variant="h6" component="h2" color="textSecondary" className={classes.title} gutterBottom>
         Create a NewNote
       </Typography>
 
-      <Button onClick={() => {
-        console.log('You clicked me')
-      }} type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>Submit</Button>
+      <Button className={classes.btn} type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>Submit</Button>
     </Container>
   );
 }
