@@ -22,8 +22,19 @@ export default function Notes() {
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
 
+  const [titleError, setTitleError] = useState(false)
+  const [detailsError, setDetailsError] = useState(false)
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(title === '') {
+      setTitleError(true)
+    }
+
+    if(details === '') {
+      setDetailsError(true)
+    }
 
     if(title && details) {
       console.log(title, details)
@@ -45,6 +56,7 @@ export default function Notes() {
           color="secondary"
           fullWidth
           required
+          error={titleError}
         />
         <TextField
           onChange={e => setDetails(e.target.value)}
@@ -56,6 +68,7 @@ export default function Notes() {
           rows={4}
           fullWidth
           required
+          error={detailsError}
         />
          <Button type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>Submit</Button>
       </form>
