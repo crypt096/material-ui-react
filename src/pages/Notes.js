@@ -3,6 +3,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Container from '@material-ui/core/Container';
 
+// Icons
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+
 export default function Notes() {
   return (
     <Container>
@@ -12,7 +15,7 @@ export default function Notes() {
 
       <Button onClick={() => {
         console.log('You clicked me')
-      }} type="submit" color="secondary" variant="contained">Submit</Button>
+      }} type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>Submit</Button>
     </Container>
   );
 }
