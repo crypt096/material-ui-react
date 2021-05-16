@@ -15,6 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 // Icons
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   field: {
@@ -26,7 +27,8 @@ const useStyles = makeStyles({
 
 export default function Notes() {
   const classes = useStyles();
-  
+  const history = useHistory();
+
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
   const [titleError, setTitleError] = useState(false)
@@ -38,16 +40,24 @@ export default function Notes() {
     setTitleError(false)
     setDetailsError(false)
 
-    if(title === '') {
+    if (title === '') {
       setTitleError(true)
     }
 
-    if(details === '') {
+    if (details === '') {
       setDetailsError(true)
     }
 
-    if(title && details) {
-      console.log(title, details)
+    if (title && details) {
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          title,
+          details,
+          category
+        }),
+      }).then(() => history.push('/'))
     }
   }
 
@@ -85,14 +95,14 @@ export default function Notes() {
           <FormLabel>Note Category</FormLabel>
 
           <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
-            <FormControlLabel control={<Radio/>} label="Money" value="money" />
-            <FormControlLabel control={<Radio/>} label="Todos" value="todos" />
-            <FormControlLabel control={<Radio/>} label="Reminders" value="reminders" />
-            <FormControlLabel control={<Radio/>} label="Work" value="work" />
+            <FormControlLabel control={<Radio />} label="Money" value="money" />
+            <FormControlLabel control={<Radio />} label="Todos" value="todos" />
+            <FormControlLabel control={<Radio />} label="Reminders" value="reminders" />
+            <FormControlLabel control={<Radio />} label="Work" value="work" />
           </RadioGroup>
         </FormControl>
 
-         <Button type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>Submit</Button>
+        <Button type="submit" color="secondary" variant="contained" endIcon={<KeyboardArrowRightIcon />}>Submit</Button>
       </form>
     </Container>
   );
